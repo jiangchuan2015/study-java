@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>chuan.study</groupId>
+    <artifactId>chuan-study-package</artifactId>
+    <name>chuan-study-package</name>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2019</inceptionYear>
+    <description>我的学习</description>
+
+    <developers>
+        <developer>
+            <id>jiang.chuan</id>
+            <name>姜川</name>
+            <email>jctr@qq.com</email>
+            <roles>
+                <role>Owner</role>
+                <role>System Architect</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>multi-thread</module>
+    </modules>
+
+</project>
