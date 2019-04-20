@@ -7,7 +7,7 @@ package chuan.study.concurrent.hello;
  */
 public class TemplateMethod {
     public static void main(String[] args) {
-        new BaseInner() {
+        new AbstractInnerPrinter() {
             @Override
             protected void wrapPrint(String message) {
                 System.out.println("## " + message + "  ##");
@@ -17,7 +17,7 @@ public class TemplateMethod {
         // 我是分隔符号
         System.out.println();
 
-        new BaseInner() {
+        new AbstractInnerPrinter() {
             @Override
             protected void wrapPrint(String message) {
                 System.out.println("** " + message + "  **");
@@ -26,9 +26,19 @@ public class TemplateMethod {
     }
 
 
-    static abstract class BaseInner {
+    static abstract class AbstractInnerPrinter {
+        /**
+         * 打印消息
+         *
+         * @param message 消息内容
+         */
         abstract void wrapPrint(String message);
 
+        /**
+         * 模板模式输出消息
+         *
+         * @param message 消息内容
+         */
         final void print(String message) {
             System.out.println("######################");
             wrapPrint(message);
