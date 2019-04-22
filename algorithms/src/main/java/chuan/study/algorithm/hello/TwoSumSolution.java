@@ -15,7 +15,8 @@ public class TwoSumSolution {
     /**
      * 私有构造函数
      */
-    private TwoSumSolution() { }
+    private TwoSumSolution() {
+    }
 
     /**
      * 求满足条件的下标
@@ -38,8 +39,10 @@ public class TwoSumSolution {
 
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         int[] results = TwoSumSolution.twoSum(new int[]{2, 7, 11, 15}, 9);
+        long end = System.currentTimeMillis() - start;
 
-        System.out.println(Arrays.toString(results));
+        System.out.println(end + ":" + Arrays.toString(results));
     }
 }
