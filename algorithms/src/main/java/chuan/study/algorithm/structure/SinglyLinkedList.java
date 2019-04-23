@@ -81,11 +81,11 @@ public class SinglyLinkedList<T> {
         if (null == head) {
             this.head = newNode;
         } else {
-            Node<T> point = head;
-            while (null != point.getNext()) {
-                point = point.getNext();
+            Node<T> current = head;
+            while (null != current.getNext()) {
+                current = current.getNext();
             }
-            point.setNext(newNode);
+            current.setNext(newNode);
         }
     }
 
@@ -187,7 +187,7 @@ public class SinglyLinkedList<T> {
      * 打印结果
      */
     public void printAll() {
-        Node current = head;
+        Node<T> current = head;
         while (current != null) {
             System.out.print(current.getItem() + " ");
             current = current.getNext();
