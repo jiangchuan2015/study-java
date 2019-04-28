@@ -1,5 +1,6 @@
 package chuan.study.spring.reactive.domain;
 
+import chuan.study.spring.reactive.validation.CityInput;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -19,12 +20,12 @@ public class City implements Serializable {
     /**
      * 城市名称
      */
-    @NotBlank(message = "城市名称不能为空", groups = {String.class})
+    @NotBlank(message = "城市名称不能为空", groups = {CityInput.class})
     private String name;
 
     /**
      * 描述
      */
-    @NotBlank(message = "城市描述不能为空", groups = {String.class})
+    @NotBlank(message = "城市描述不能为空", groups = {CityInput.class})
     private String description;
 }

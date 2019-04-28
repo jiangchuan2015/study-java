@@ -12,8 +12,15 @@ spring:
         max-wait: 1000
 
 
+# actuator 相关配置
+info.app.author: chuan jiang
+info.app.encoding: @project.build.sourceEncoding@
+
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
+
 logging:
   level:
     root: info
-    org.springframework: DEBUG
-    org.springframework.web: DEBUG
+    org.springframework.web: TRACE
+    org.springframework.boot.actuate: TRACE

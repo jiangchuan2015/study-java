@@ -1,7 +1,11 @@
 package chuan.study.spring.reactive.controller;
 
 import chuan.study.spring.reactive.domain.City;
-import lombok.AllArgsConstructor;
+import chuan.study.spring.reactive.validation.CityInput;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.binder.MeterBinder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.core.ReactiveValueOperations;
 import org.springframework.http.MediaType;
@@ -24,18 +28,24 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/city")
-@AllArgsConstructor
-public class CityController {
+public class CityController implements MeterBinder {
     private final ReactiveRedisTemplate reactiveRedisTemplate;
+    private Counter counter = null;
+
+    @Autowired
+    public CityController(ReactiveRedisTemplate reactiveRedisTemplate) {
+        this.reactiveRedisTemplate = reactiveRedisTemplate;
+    }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Mono<City> findById(@PathVariable("id") Long id) {
+        counter.increment();
         ReactiveValueOperations<String, City> operations = reactiveRedisTemplate.opsForValue();
         return operations.get(generateCacheKey(id));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Mono<City> create(@RequestBody @Validated({String.class}) City city, BindingResult validResult) {
+    public Mono<City> create(@RequestBody @Validated({CityInput.class}) City city, BindingResult validResult) {
         if (validResult.hasErrors()) {
             throw new IllegalArgumentException("参数不正确");
         }
@@ -48,8 +58,15 @@ public class CityController {
         return reactiveRedisTemplate.delete(generateCacheKey(id));
     }
 
+
+    @Override
+    public void bindTo(MeterRegistry meterRegistry) {
+        this.counter = meterRegistry.counter("controller.city.count");
+    }
+
     private String generateCacheKey(Long id) {
         return "city:" + id;
     }
+
 
 }
