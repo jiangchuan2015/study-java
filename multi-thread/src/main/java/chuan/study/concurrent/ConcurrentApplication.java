@@ -21,6 +21,9 @@ import reactor.core.scheduler.Schedulers;
 public class ConcurrentApplication implements ApplicationRunner {
     public static void main(String[] args) {
         SpringApplication.run(ConcurrentApplication.class, args);
+        // new SpringApplicationBuilder(ConcurrentApplication.class)
+        //        .web(WebApplicationType.NONE)
+        //        .run(args);
     }
 
 
