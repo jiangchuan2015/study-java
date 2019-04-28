@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.core.ReactiveValueOperations;
 import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +35,10 @@ public class CityController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Mono<City> create(@RequestBody City city) {
+    public Mono<City> create(@RequestBody @Validated({String.class}) City city, BindingResult validResult) {
+        if (validResult.hasErrors()) {
+            throw new IllegalArgumentException("参数不正确");
+        }
         ReactiveValueOperations<String, City> operations = reactiveRedisTemplate.opsForValue();
         return operations.getAndSet(generateCacheKey(city.getId()), city);
     }
