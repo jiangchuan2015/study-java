@@ -1,5 +1,6 @@
 server:
   port: 8090
+
 spring:
   redis:
     host: 127.0.0.1
@@ -10,6 +11,9 @@ spring:
         max-idle: 20
         min-idle: 5
         max-wait: 1000
+  output:
+    ansi:
+      enabled: always
 
 
 # actuator 相关配置
@@ -23,4 +27,4 @@ logging:
   level:
     root: info
     org.springframework.web: TRACE
-    org.springframework.boot.actuate: TRACE
+    # org.springframework.boot.actuate: TRACE
