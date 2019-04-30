@@ -1,6 +1,11 @@
 package chuan.study.concurrent.hello;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 /**
  * 1. 查出进程号
@@ -80,6 +85,19 @@ public class DeadLockSample extends Thread {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        // 通过编程的方式获取死锁信息
+        final ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> {
+            long[] threadIds = mbean.findDeadlockedThreads();
+            if (null != threadIds && threadIds.length > 0) {
+                Stream.of(mbean.getThreadInfo(threadIds)).forEach(info -> {
+                    System.out.println(info.getThreadName() + ": " + info);
+                });
+            }
+        }, 1, 10, TimeUnit.SECONDS);
+
+
         String first = "LOCK-A", second = "LOCK-B";
         DeadLockSample t1 = new DeadLockSample("线程一", first, second);
         DeadLockSample t2 = new DeadLockSample("线程二", second, first);
