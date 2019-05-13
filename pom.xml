@@ -26,6 +26,7 @@
         <module>multi-thread</module>
         <module>algorithms</module>
         <module>spring-reactive</module>
+        <module>netty</module>
     </modules>
 
 </project>
