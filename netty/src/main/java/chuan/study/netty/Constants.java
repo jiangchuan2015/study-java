@@ -1,5 +1,7 @@
 package chuan.study.netty;
 
+import io.netty.util.AttributeKey;
+
 import java.nio.charset.Charset;
 
 /**
@@ -28,4 +30,10 @@ public interface Constants {
      * 系统默认编码
      */
     Charset DEFAULT_CHARSET = Charset.forName(DEFAULT_CHARSET_NAME);
+
+
+    /**
+     * 登录属性
+     */
+    AttributeKey<Boolean> LOGIN_ATTRIBUTE = AttributeKey.newInstance("login");
 }
