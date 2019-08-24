@@ -43,7 +43,7 @@ public class CyclicBarrierTest implements Runnable {
         final int maxThread = 10;
         CyclicBarrier barrier = new CyclicBarrier(3);
         ExecutorService threadPool = new ThreadPoolExecutor(3,
-                maxThread, 0, TimeUnit.MILLISECONDS,
+                maxThread, 5, TimeUnit.MINUTES,
                 new LinkedBlockingQueue<>(1024),
                 new ThreadFactoryBuilder().setNameFormat("BARRIER-%d").build(),
                 new ThreadPoolExecutor.CallerRunsPolicy());
