@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>chuan.study</groupId>
-    <artifactId>chuan-study-package</artifactId>
-    <name>chuan-study-package</name>
+    <artifactId>chuan-study</artifactId>
+    <name>chuan-study</name>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <inceptionYear>2019</inceptionYear>
